@@ -2,13 +2,10 @@
 
 ## 常规配置
 1. build-essensial
-2. boost  -> build & install
-3. clang  -> build & install
-4. cmake  -> build & install
-5. git
-6. vim -> .vimrc
-7. oh-my-zsh
-8. ctags
+2. cmake  -> build & install
+3. git
+4. vim -> .vimrc
+5. oh-my-zsh
 
 ## Ubuntu 20LTS安装Mysql
 1. sudo apt update
@@ -23,3 +20,34 @@
   > exit<br/>
   > mysql -u [user] -p<br/>
   > password: 输入设定的密码
+
+## Ubuntu最新GCC
+```shell
+sudo apt-get update
+sudo apt-get install build-essential software-properties-common -y
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+sudo apt-get update
+sudo apt-get install gcc-snapshot -y
+sudo apt-get update
+sudo apt-get install gcc-11 g++-11 -y
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 60 --slave /usr/bin/g++ g++ /usr/bin/g++-11
+
+# To verify if it worked. Just type in your terminal
+gcc -v
+```
+
+## Ubuntu下载boost
+```shell
+git clone --recursive git@github.com:boostorg/boost.git
+cd boost
+git checkout <version>
+./bootstrap.sh
+# ./b2
+sudo ./b2 install
+
+# 此时CMake的find_package()应该能够正常使用了
+
+# headers only
+./b2 headers
+```
+
