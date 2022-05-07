@@ -7,7 +7,7 @@
 4. vim -> .vimrc
 5. oh-my-zsh
 
-## Ubuntu 20LTS安装Mysql
+## Ubuntu 20 LTS安装Mysql
 1. sudo apt update
 2. sudo apt install mysql-server
 3. 安装完成后验证是否以运行 sudo systemctl status mysql
@@ -36,6 +36,23 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 60 --slave /
 gcc -v
 ```
 
+从源代码编译
+```shell
+# 相关依赖
+sudo apt install libgmp-dev libmpfr-dev libmpc-dev
+git clone --recursive git@github.com:gcc-mirror/gcc.git
+cd gcc
+git switch <version>
+./configure
+
+make -j4 install
+# 设置优先级方便切换，默认用最高优先级
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 60 --slave /usr/bin/g++ g++ /usr/bin/g++-11
+# 切换
+sudo update-alternativess --config gcc
+sudo update-alternativess --config g++
+```
+
 ## Ubuntu下载boost
 ```shell
 git clone --recursive git@github.com:boostorg/boost.git
@@ -50,4 +67,15 @@ sudo ./b2 install
 # headers only
 ./b2 headers
 ```
+## Ubuntu CMake最新版
+支持c++11的编译器<br/>
+支持make命令
 
+```shell
+git clone git@github.com:Kitware/CMake.git
+cd cmake
+git checkout <version>
+./bootstrap &&
+make &&
+sudo make install
+```
