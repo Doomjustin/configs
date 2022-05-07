@@ -58,7 +58,8 @@ sudo update-alternativess --config g++
 git clone --recursive git@github.com:boostorg/boost.git
 cd boost
 git checkout <version>
-./bootstrap.sh
+git submodule update --init
+./bootstrap.sh -j4
 # ./b2
 sudo ./b2 install
 
@@ -75,7 +76,7 @@ sudo ./b2 install
 git clone git@github.com:Kitware/CMake.git
 cd cmake
 git checkout <version>
-./bootstrap &&
+./bootstrap -j4 &&
 make &&
 sudo make install
 ```
