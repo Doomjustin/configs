@@ -59,9 +59,9 @@ git clone --recursive git@github.com:boostorg/boost.git
 cd boost
 git checkout <version>
 git submodule update --init
-./bootstrap.sh -j4
+./bootstrap.sh
 # ./b2
-sudo ./b2 install
+sudo ./b2 -j4 install
 
 # 此时CMake的find_package()应该能够正常使用了
 
@@ -76,7 +76,7 @@ sudo ./b2 install
 git clone git@github.com:Kitware/CMake.git
 cd cmake
 git checkout <version>
-./bootstrap -j4 &&
-make &&
+./bootstrap &&
+make -j4 &&
 sudo make install
 ```
